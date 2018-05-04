@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:proactive:jobdescriptor:3.8"
+	xsi:schemaLocation="urn:proactive:jobdescriptor:3.8 http://www.activeeon.com/public_content/schemas/proactive/jobdescriptor/3.8/schedulerjob.xsd"
+	name="Spark PI" projectName="Basic Big Data" priority="normal"
+	onTaskError="continueJobExecution" maxNumberOfExecution="2">
+	<variables>
+		<variable name="spark_master_url" value="spark://sparkContainerMaster:7077" />
+		<variable name="network" value="my-net" />
+	</variables>
+	<description>
+    <![CDATA[ A workflow to submit a Spark job from a docker container, to estimate PI ]]>
+  </description>
+	<genericInformation>
+		<info name="pca.action.icon"
+			value="/automation-dashboard/styles/patterns/img/wf-icons/spark.png" />
+		<info name="Documentation"
+			  value="http://activeeon.com/resources/activeeon-deploy-swarm-hdfs-spark.pdf" />
+	</genericInformation>
+	<taskFlow>
+		<task name="submit_spark_PI">
+			<genericInformation>
+				<info name="task.icon"
+					value="/automation-dashboard/styles/patterns/img/wf-icons/spark.png" />
+			</genericInformation>
+			<scriptExecutable>
+				<script>
+					<code language="bash">
+            <![CDATA[
+container_id="$(docker run --net=$variables_network -di activeeon/hdfs-spark:1.0 /bin/sh -c 'bash')"
+docker exec $container_id /bin/sh -c 'spark-submit --deploy-mode client --class org.apache.spark.examples.SparkPi --num-executors 1 --driver-memory 1g --executor-cores 2 --queue default --master '$variables_spark_master_url' $SPARK_HOME/examples/jars/spark-examples*.jar 10'
+docker rm -f $container_id
+]]>
+					</code>
+				</script>
+			</scriptExecutable>
+		</task>
+	</taskFlow>
+</job>
