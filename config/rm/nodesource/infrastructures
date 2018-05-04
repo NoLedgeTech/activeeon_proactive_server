@@ -1,0 +1,31 @@
+# A default infrastructure (can register existing nodes and remove them)
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.PBSInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.LSFInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.GenericBatchJobInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.SSHInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.SSHInfrastructureV2
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.LocalInfrastructure
+
+# An infrastructure manager that operates custom scripts in order to deploy/remove nodes
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.CLIInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.AutoUpdateInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.AWSEC2Infrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.OpenstackInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.VMWareInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.AzureInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.NativeSchedulerInfrastructure
+
+org.ow2.proactive.resourcemanager.nodesource.infrastructure.AzureVMScaleSetInfrastructure

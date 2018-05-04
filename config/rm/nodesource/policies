@@ -1,0 +1,25 @@
+# Static nodes acquisition
+org.ow2.proactive.resourcemanager.nodesource.policy.StaticPolicy
+
+# Static nodes acquisition but tries to restart down nodes
+org.ow2.proactive.resourcemanager.nodesource.policy.RestartDownNodesPolicy
+
+# Nodes acquisition for particular time slot
+org.ow2.proactive.resourcemanager.nodesource.policy.TimeSlotPolicy
+
+# Releases all nodes when scheduler is idle for some time
+org.ow2.proactive.scheduler.resourcemanager.nodesource.policy.ReleaseResourcesWhenSchedulerIdle
+
+# Allocated nodes for given time slot in cron syntax
+org.ow2.proactive.resourcemanager.nodesource.policy.CronPolicy
+
+
+org.ow2.proactive.scheduler.resourcemanager.nodesource.policy.NativeSchedulerPolicy
+
+org.ow2.proactive.scheduler.resourcemanager.nodesource.policy.CronLoadBasedPolicy
+
+org.ow2.proactive.scheduler.resourcemanager.nodesource.policy.CronSlotLoadBasedPolicy
+
+org.ow2.proactive.scheduler.resourcemanager.nodesource.policy.SchedulerLoadingPolicy
+
+org.ow2.proactive.resourcemanager.nodesource.policy.SimpleJMXNodeSourcePolicy

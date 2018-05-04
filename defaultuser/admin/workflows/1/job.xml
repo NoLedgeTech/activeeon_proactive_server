@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="urn:proactive:jobdescriptor:3.10"
+     xsi:schemaLocation="urn:proactive:jobdescriptor:3.10 http://www.activeeon.com/public_content/schemas/proactive/jobdescriptor/3.10/schedulerjob.xsd"
+    name="pawelname" projectName="pawelproject"
+    priority="normal"
+    onTaskError="continueJobExecution"
+     maxNumberOfExecution="2">
+  <variables>
+    <variable name="pawelvariable" value="pawelvalue" />
+  </variables>
+  <description>
+    <![CDATA[ paweldescription ]]>
+  </description>
+  <genericInformation>
+    <info name="pawelgenericname" value="pawelgenericvalue"/>
+  </genericInformation>
+  <taskFlow>
+    <task name="pawel_cron_task">
+      <description>
+        <![CDATA[ Cron task running every minute ]]>
+      </description>
+      <scriptExecutable>
+        <script>
+          <code language="javascript">
+            <![CDATA[
+print(new Date());
+]]>
+          </code>
+        </script>
+      </scriptExecutable>
+    </task>
+    <task name="pawel_Docker_Task">
+      <description>
+        <![CDATA[ Simple task running multi-container applications with Docker. ]]>
+      </description>
+      <depends>
+        <task ref="pawel_cron_task"/>
+      </depends>
+      <scriptExecutable>
+        <script>
+          <code language="docker-compose">
+            <![CDATA[
+helloworld:
+    image: busybox
+    command: echo "Hello ProActive"
+]]>
+          </code>
+        </script>
+      </scriptExecutable>
+    </task>
+  </taskFlow>
+</job>
