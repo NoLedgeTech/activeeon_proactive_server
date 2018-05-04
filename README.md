@@ -1,6 +1,6 @@
 # ActiveEON Proactive Server
 
-Docker image with trial version of ActiveEON Proactive Server v8.0.0
+Docker image with trial version of ActiveEon Proactive Server v8.0.0
 
 ---
 ### Prerequisites
@@ -20,14 +20,14 @@ Docker is licensed under various licenses as stated [here](https://www.docker.co
 
 Ubuntu [License](https://www.ubuntu.com/licensing)
 
-Proactive Server license needs to be obtained from ActiveEON.
-This code is using trial version of Proactive Server 8.0.0 Enterprise Trial Edition. All rights reserved.
+Proactive Server license needs to be obtained from ActiveEon.
+This code is using Proactive Server 8.0.0 Enterprise Trial Edition. All rights reserved. Copyright (C) 1997-2018 INRIA/University of Nice-Sophia Antipolis/ActiveEon
 
 ---
 ### Dockerfile
 Docker image uses Ubuntu 16.04 Xenial minimal server as base.
 OpenSDK 8 Java is installed on top of it.
-ActiveEON Proactive Server 8.0.0 Enterprise Trial Edition is downloaded from secured AWS S3 bucket and installed to `/opt/activeeon_proactive_server/` directory. 
+ActiveEon Proactive Server 8.0.0 Enterprise Trial Edition is downloaded from secured AWS S3 bucket and installed to `/opt/activeeon_proactive_server/` directory. 
 AWS S3 bucket is IP restricted. [Contact us](mailto:engineering@noledgetech.com) with your IP and we'll open it for you (you can get your IP from various lovcations, e.g. [http://ip-api.com](http://ip-api.com/line/?fields=query)
 Installation contains **empty** server configuration (`./config`) and  workflows (`./data/defaultuser`) directories, which are mounted as volumes at runtime, hence all config and workflows are saved to persistent storage. These 2 directores are part of this repository, however `config` is the default one, while `defaultuser` contains 2 demo projects.
 
@@ -102,6 +102,8 @@ It should not be used after deployment to live environment. Only for development
 ---
 ### Security
 This repository contains all default security credentials, databases, keystores and connections.
-For real life deployments you need to convert them into variables using whatever security means you want and make sure they are sufficiently secured. I recommend to use Vault by HashiCorp, but it's only our personal preference. It will require you to write custom scripts to retrieve secrets from Vault and put them in configuration before starting server.
+For real life deployments you need to convert them into variables using whatever security means you want and make sure they are sufficiently secured. We recommend to use Vault by HashiCorp, but it's only our personal preference. It will require you to write custom scripts to retrieve secrets from Vault and put them in configuration before starting server.
 We also recommend to separate any databases used by this server and secure them according to your security policy.
-For support please contact us at support@noledgetech.com
+For external communication it is advised to encryt all traffic using HTTPS.
+You can configure LDAP/Active Directory authentication/authorisation.
+For support please contact us at security@noledgetech.com
