@@ -15,40 +15,113 @@
   </description>
   <genericInformation>
     <info name="pawelgenericname" value="pawelgenericvalue"/>
+    <info name="bucketName" value="basic-examples"/>
+    <info name="pca.action.icon" value="/automation-dashboard/styles/patterns/img/wf-icons/start_at.png"/>
+    <info name="START_AT" value="2199-01-01T12:00:00+01:00"/>
+    <info name="group" value="public-objects"/>
   </genericInformation>
   <taskFlow>
-    <task name="pawel_cron_task">
+    <task name="Computation1">
       <description>
-        <![CDATA[ Cron task running every minute ]]>
+        <![CDATA[ Compute Pi and return it ]]>
       </description>
-      <scriptExecutable>
-        <script>
-          <code language="javascript">
-            <![CDATA[
-print(new Date());
-]]>
-          </code>
-        </script>
-      </scriptExecutable>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarlo">
+        <parameters>
+          <parameter name="steps" value="20"/>
+          <parameter name="iterations" value="100000000"/>
+        </parameters>
+      </javaExecutable>
     </task>
-    <task name="pawel_Docker_Task">
+    <task name="Computation2">
       <description>
-        <![CDATA[ Simple task running multi-container applications with Docker. ]]>
+        <![CDATA[ Compute Pi and return it ]]>
+      </description>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarlo">
+        <parameters>
+          <parameter name="steps" value="20"/>
+          <parameter name="iterations" value="100000000"/>
+        </parameters>
+      </javaExecutable>
+    </task>
+    <task name="Computation3">
+      <description>
+        <![CDATA[ Compute Pi and return it ]]>
+      </description>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarlo">
+        <parameters>
+          <parameter name="steps" value="20"/>
+          <parameter name="iterations" value="100000000"/>
+        </parameters>
+      </javaExecutable>
+    </task>
+    <task name="Computation4">
+      <description>
+        <![CDATA[ Compute Pi and return it ]]>
+      </description>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarlo">
+        <parameters>
+          <parameter name="steps" value="20"/>
+          <parameter name="iterations" value="100000000"/>
+        </parameters>
+      </javaExecutable>
+    </task>
+    <task name="Computation5">
+      <description>
+        <![CDATA[ Compute Pi and return it ]]>
+      </description>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarlo">
+        <parameters>
+          <parameter name="steps" value="20"/>
+          <parameter name="iterations" value="100000000"/>
+        </parameters>
+      </javaExecutable>
+    </task>
+    <task name="Computation6">
+      <description>
+        <![CDATA[ Compute Pi and return it ]]>
+      </description>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarlo">
+        <parameters>
+          <parameter name="steps" value="20"/>
+          <parameter name="iterations" value="100000000"/>
+        </parameters>
+      </javaExecutable>
+    </task>
+    <task name="Average1">
+      <description>
+        <![CDATA[ Do the average of 1 2 3 and return it. ]]>
       </description>
       <depends>
-        <task ref="pawel_cron_task"/>
+        <task ref="Computation1"/>
+        <task ref="Computation2"/>
+        <task ref="Computation3"/>
       </depends>
-      <scriptExecutable>
-        <script>
-          <code language="docker-compose">
-            <![CDATA[
-helloworld:
-    image: busybox
-    command: echo "Hello ProActive"
-]]>
-          </code>
-        </script>
-      </scriptExecutable>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarloAverage"></javaExecutable>
+    </task>
+    <task name="Average2">
+      <description>
+        <![CDATA[ Do the average of 4 5 6 and return it. ]]>
+      </description>
+      <depends>
+        <task ref="Computation4"/>
+        <task ref="Computation5"/>
+        <task ref="Computation6"/>
+      </depends>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarloAverage"></javaExecutable>
+    </task>
+    <task name="LastAverage"
+    
+    
+    
+    preciousResult="true" >
+      <description>
+        <![CDATA[ Do the average of average 1 2 and return it. ]]>
+      </description>
+      <depends>
+        <task ref="Average1"/>
+        <task ref="Average2"/>
+      </depends>
+      <javaExecutable class="org.ow2.proactive.scheduler.examples.MonteCarloAverage"></javaExecutable>
     </task>
   </taskFlow>
 </job>

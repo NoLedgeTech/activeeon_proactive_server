@@ -1,4 +1,4 @@
-.PHONY: help build start logs test stop deploy bash
+.PHONY: help build start logs test stop deploy bash sh
 
 DOCKER_NAME=activeeon_proactive_server
 DOCKER_VER=0.0.1
@@ -7,7 +7,7 @@ DCR_PORT=5000
 ENV_FILE=$(PWD)/.env
 
 # Get Container ID if it's running
-CONTAINER_ID := $(shell bash -c 'docker ps -q -f name=${DOCKER_NAME}_${DOCKER_VER}')
+CONTAINER_ID := $(shell bash -c 'docker ps -a -q -f name=${DOCKER_NAME}_${DOCKER_VER}')
 
 # Get current directory
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -79,6 +79,10 @@ deploy: ## deploys image to container registry
 	@echo Deploying container ${DOCKER_NAME}:${DOCKER_VER}
 	@docker push ${DCR_HOST}:${DCR_PORT}/${DOCKER_NAME}
 
-bash: ##   login to container
+bash: ##   login to container using bash
 	@echo "Login into container ${DOCKER_NAME}:${DOCKER_VER} -> ${CONTAINER_ID}"
 	@docker exec -u 0 -it ${CONTAINER_ID} bash
+
+sh: ##     login to container using sh
+	@echo "Login into container ${DOCKER_NAME}:${DOCKER_VER} -> ${CONTAINER_ID}"
+	@docker exec -u 0 -it ${CONTAINER_ID} sh
